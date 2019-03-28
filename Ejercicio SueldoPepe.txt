@@ -1,0 +1,77 @@
+class Empleado(object):
+  def __init__ (self, nombre, cat, faltas, bonoR, bonoP):
+    self.nombre = nombre
+    self.cat = cat
+    self.faltas=faltas
+    self.bonoP=bonoP
+    self.bonoR=bonoR
+    #self.sueldo=sueldo
+
+  def remuneracion(self,cat):
+    if (cat==1):
+      self.sueldo=20000
+    else:
+      self.sueldo=15000
+    return(self.sueldo)
+
+  def bonoResultado(self,bono) :
+    if (bono==1):
+      self.bonoR = self.sueldo*0.1
+    if (bono==2):
+      self.bonoR = 800
+    if (bono==3):
+      self.bonoR = 0
+    return(self.bonoR)
+
+  def bonoPresentismo(self,bono):
+    self.bonoP=0
+    if (bono == 1 and self.faltas == 0):
+      self.bonoP = 2000
+    if (bono == 1 and self.faltas == 1):
+      self.bonoP = 1000
+    if (bono == 2 and self.faltas == 0):
+      self.bonoP = 100
+    if (bono == 3 and self.sueldo<18000) :
+      self.bonoP = 500
+    if (bono == 3 and self.sueldo>18000) :
+      self.bonoP = 300         
+print(" ")
+print ("Ingrese el nombre del empleado: ")
+nombre = input()
+print(" ")
+print ("Ingrese la categoria del empleado: ")
+print ("1-Operario ")
+print ("2-Gerente ")
+cat = int(input())
+empleado = Empleado(nombre,cat,0,0,0)
+empleado.sueldo = empleado.remuneracion(cat)
+print(" ")
+print ("Bonos por resultados!!")
+print ("Ingrese el bono por resultados para el empleado")
+print("1-Porcentaje: 10% sobre el neto")
+print("2-Monto fijo: $800 fijos.")
+print("3-Nulo: nada")
+empleado.bonoResultado(int(input()))
+
+print(" ")
+print ("Bonos por presentismo!!")
+print ("Ingrese cuantos dias falto el empleado a trabajar")
+empleado.faltas = int(input())
+print(" ")
+print ("Ingrese el bono por presentismo para el empleado")
+print ("1-Normal: $2000 ")
+print ("2-Ajuste: $100 ")
+print ("3-Demagógico: $500")
+print("4-nada")
+empleado.bonoPresentismo(int(input()))
+
+print (" ")
+print ("------------------------------ ")
+print ("El nombre del empleado es " )
+print (empleado.nombre)
+print ("El sueldo básico es " )
+print (empleado.remuneracion(cat))
+print ("Su sueldo con bonos es")
+print (empleado.bonoR+empleado.bonoP+empleado.sueldo) 
+
+
